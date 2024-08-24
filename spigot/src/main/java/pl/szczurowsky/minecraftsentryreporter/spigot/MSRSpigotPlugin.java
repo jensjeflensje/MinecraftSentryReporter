@@ -9,6 +9,8 @@ import pl.szczurowsky.minecraftsentryreporter.common.logging.SentryLogHandler;
 import pl.szczurowsky.minecraftsentryreporter.common.sentry.SentryInitializer;
 import pl.szczurowsky.minecraftsentryreporter.spigot.command.ProductionSwitchCommand;
 
+import java.io.File;
+import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Handler;
@@ -42,7 +44,15 @@ public class MSRSpigotPlugin extends JavaPlugin implements MSRPlugin {
 
     @Override
     public String getServerName() {
-        return this.configurationManager.getSentryConfig().getServerName();
+        try {
+            File hostnameFile = new File("/etc/hostname");
+            Scanner fileScanner = new Scanner(hostnameFile);
+            String hostname = fileScanner.nextLine();
+            fileScanner.close();
+            return hostname;
+        } catch (Exception ignored) {
+            return "Unknown server";
+        }
     }
 
     @Override
