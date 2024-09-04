@@ -1,5 +1,6 @@
 package pl.szczurowsky.minecraftsentryreporter.common;
 
+import java.util.List;
 import java.util.SortedMap;
 
 public interface MSRPlugin {
@@ -10,5 +11,6 @@ public interface MSRPlugin {
     String getServerImplementation();
     SortedMap<String, String> getLoadedPlugins();
     int getOnlinePlayers();
+    List<String> getPlayerList();
 
 }

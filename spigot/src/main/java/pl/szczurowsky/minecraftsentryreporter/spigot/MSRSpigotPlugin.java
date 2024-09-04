@@ -1,6 +1,7 @@
 package pl.szczurowsky.minecraftsentryreporter.spigot;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.szczurowsky.minecraftsentryreporter.common.MSRPlugin;
@@ -10,6 +11,7 @@ import pl.szczurowsky.minecraftsentryreporter.common.sentry.SentryInitializer;
 import pl.szczurowsky.minecraftsentryreporter.spigot.command.ProductionSwitchCommand;
 
 import java.io.File;
+import java.util.List;
 import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -82,5 +84,10 @@ public class MSRSpigotPlugin extends JavaPlugin implements MSRPlugin {
     @Override
     public int getOnlinePlayers() {
         return Bukkit.getOnlinePlayers().size();
+    }
+
+    @Override
+    public List<String> getPlayerList() {
+        return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
     }
 }

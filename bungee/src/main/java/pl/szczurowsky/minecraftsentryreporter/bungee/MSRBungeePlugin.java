@@ -1,5 +1,6 @@
 package pl.szczurowsky.minecraftsentryreporter.bungee;
 
+import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Plugin;
 import pl.szczurowsky.minecraftsentryreporter.bungee.command.ProductionSwitchCommand;
 import pl.szczurowsky.minecraftsentryreporter.common.MSRPlugin;
@@ -7,6 +8,7 @@ import pl.szczurowsky.minecraftsentryreporter.common.config.ConfigurationManager
 import pl.szczurowsky.minecraftsentryreporter.common.logging.SentryLogHandler;
 import pl.szczurowsky.minecraftsentryreporter.common.sentry.SentryInitializer;
 
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Handler;
@@ -69,5 +71,10 @@ public class MSRBungeePlugin extends Plugin implements MSRPlugin {
     @Override
     public int getOnlinePlayers() {
         return this.getProxy().getOnlineCount();
+    }
+
+    @Override
+    public List<String> getPlayerList() {
+        return this.getProxy().getPlayers().stream().map(CommandSender::getName).toList();
     }
 }

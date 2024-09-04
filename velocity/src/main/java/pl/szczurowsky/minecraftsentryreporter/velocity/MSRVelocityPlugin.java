@@ -9,6 +9,7 @@ import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.PluginContainer;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
+import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import pl.szczurowsky.minecraftsentryreporter.common.MSRPlugin;
 import pl.szczurowsky.minecraftsentryreporter.common.config.ConfigurationManager;
@@ -18,6 +19,7 @@ import pl.szczurowsky.minecraftsentryreporter.velocity.command.ProductionSwitchC
 
 import javax.inject.Inject;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Handler;
@@ -100,5 +102,10 @@ public class MSRVelocityPlugin implements MSRPlugin {
     @Override
     public int getOnlinePlayers() {
         return this.proxy.getPlayerCount();
+    }
+
+    @Override
+    public List<String> getPlayerList() {
+        return this.proxy.getAllPlayers().stream().map(Player::getUsername).toList();
     }
 }
